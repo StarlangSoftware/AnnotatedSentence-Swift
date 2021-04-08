@@ -77,8 +77,8 @@ To load the annotated corpus:
 To access all the sentences in a AnnotatedCorpus:
 
 	for i in 0..<a.sentenceCount(){
-		 let annotatedSentence = a.getSentence(i)
-  }
+		let annotatedSentence = a.getSentence(i)
+	}
 
 ## AnnotatedSentence
 
