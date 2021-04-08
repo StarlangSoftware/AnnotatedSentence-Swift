@@ -84,9 +84,9 @@ To access all the sentences in a AnnotatedCorpus:
 
 Bir AnnotatedSentence'daki tüm kelimelere ulaşmak için de
 
-    for j in 0..<annotatedSentence.wordCount(){
-      annotatedWord = annotatedSentence.getWord(j)
-    }
+	for j in 0..<annotatedSentence.wordCount(){
+		annotatedWord = annotatedSentence.getWord(j)
+	}
 
 ## AnnotatedWord
 
