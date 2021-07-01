@@ -25,4 +25,5 @@ public enum ViewLayerType{
     case FRAMENET
     case SLOT
     case POLARITY
+    case CCG
 }

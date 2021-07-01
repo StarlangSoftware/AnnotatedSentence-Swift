@@ -8,7 +8,17 @@ import DependencyParser
 import SentiNet
 
 public class AnnotatedWord : Word {
-    
+    /**
+     * In order to add another layer, do the following:
+     * 1. Select a name for the layer.
+     * 2. Add a new constant to ViewLayerType.
+     * 3. Add private attribute.
+     * 4. Add an if-else to the constructor, where you set the private attribute with the layer name.
+     * 5. Update toString method.
+     * 6. Add initial value to the private attribute in other constructors.
+     * 7. Update getLayerInfo.
+     * 8. Add getter and setter methods.
+     */
     private var parse: MorphologicalParse? = nil
     private var metamorphicParse: MetamorphicParse? = nil
     private var semantic: String? = nil
@@ -19,6 +29,7 @@ public class AnnotatedWord : Word {
     private var shallowParse: String? = nil
     private var polarity: PolarityType? = nil
     private var slot: Slot? = nil
+    private var ccg: String? = nil
     
     /**
      * Constructor for the {@link AnnotatedWord} class. Gets the word with its annotation layers as input and sets the
@@ -62,6 +73,8 @@ public class AnnotatedWord : Word {
                     slot = Slot(slot: layerValue)
                 case "polarity":
                     setPolarity(polarity: layerValue)
+                case "ccg":
+                    ccg = layerValue
                 default:
                     break
             }
@@ -104,6 +117,9 @@ public class AnnotatedWord : Word {
         }
         if polarity != nil {
             result = result + "{polarity=" + getPolarityString() + "}"
+        }
+        if ccg != nil {
+            result = result + "{ccg=" + ccg! + "}"
         }
         return result
     }
@@ -188,6 +204,8 @@ public class AnnotatedWord : Word {
                 if polarity != nil {
                     return getPolarityString()
                 }
+            case ViewLayerType.CCG:
+                return ccg
             default:
                 return nil
         }
@@ -395,6 +413,23 @@ public class AnnotatedWord : Word {
         shallowParse = parse
     }
     
+    /**
+     * Returns the ccg layer of the word.
+     - Returns: Ccg of the word.
+     */
+    public func getCcg() -> String?{
+        return ccg
+    }
+    
+    /**
+     * Sets the ccg layer of the word.
+     - Parameters:
+        - semantic: New ccg of the word.
+     */
+    public func setCcg(ccg: String){
+        self.ccg = ccg
+    }
+
     /**
      * Returns the universal dependency layer of the word.
      - Returns: Universal dependency relation of the word.
