@@ -26,4 +26,5 @@ public enum ViewLayerType{
     case SLOT
     case POLARITY
     case CCG
+    case POS_TAG
 }

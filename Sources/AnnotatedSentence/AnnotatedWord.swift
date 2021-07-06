@@ -30,7 +30,8 @@ public class AnnotatedWord : Word {
     private var polarity: PolarityType? = nil
     private var slot: Slot? = nil
     private var ccg: String? = nil
-    
+    private var posTag: String? = nil
+
     /**
      * Constructor for the {@link AnnotatedWord} class. Gets the word with its annotation layers as input and sets the
      * corresponding layers.
@@ -75,6 +76,8 @@ public class AnnotatedWord : Word {
                     setPolarity(polarity: layerValue)
                 case "ccg":
                     ccg = layerValue
+                case "posTag":
+                    posTag = layerValue
                 default:
                     break
             }
@@ -120,6 +123,9 @@ public class AnnotatedWord : Word {
         }
         if ccg != nil {
             result = result + "{ccg=" + ccg! + "}"
+        }
+        if posTag != nil {
+            result = result + "{posTag=" + posTag! + "}"
         }
         return result
     }
@@ -206,6 +212,8 @@ public class AnnotatedWord : Word {
                 }
             case ViewLayerType.CCG:
                 return ccg
+            case ViewLayerType.POS_TAG:
+                return posTag
             default:
                 return nil
         }
@@ -428,6 +436,23 @@ public class AnnotatedWord : Word {
      */
     public func setCcg(ccg: String){
         self.ccg = ccg
+    }
+
+    /**
+     * Returns the posTag layer of the word.
+     - Returns: posTag of the word.
+     */
+    public func getPosTag() -> String?{
+        return posTag
+    }
+    
+    /**
+     * Sets the posTag layer of the word.
+     - Parameters:
+        - semantic: New posTag of the word.
+     */
+    public func setPosTag(posTag: String){
+        self.posTag = posTag
     }
 
     /**
