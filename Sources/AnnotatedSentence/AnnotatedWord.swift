@@ -31,6 +31,7 @@ public class AnnotatedWord : Word {
     private var slot: Slot? = nil
     private var ccg: String? = nil
     private var posTag: String? = nil
+    private var language: LanguageType = LanguageType.TURKISH
 
     /**
      * Constructor for the {@link AnnotatedWord} class. Gets the word with its annotation layers as input and sets the
@@ -51,8 +52,9 @@ public class AnnotatedWord : Word {
             let layerType = String(layer[layer.startIndex..<layer.range(of: "=")!.lowerBound])
             let layerValue = String(layer[layer.index(layer.firstIndex(of: "=")!, offsetBy: 1)...])
             switch layerType{
-                case "turkish":
+                case "turkish", "english", "persian":
                     setName(name: layerValue)
+                    language = getLanguageFromString(languageString: layerType)
                 case "morphologicalAnalysis":
                     parse = MorphologicalParse(parse: layerValue)
                 case "metaMorphemes":
@@ -90,7 +92,15 @@ public class AnnotatedWord : Word {
      - Returns: String form of the {@link AnnotatedWord}.
      */
     public override func description() -> String {
-        var result : String = "{turkish=" + getName() + "}"
+        var result : String = ""
+        switch language {
+            case .TURKISH:
+                result = "{turkish=" + getName() + "}"
+            case .ENGLISH:
+                result = "{english=" + getName() + "}"
+            case .PERSIAN:
+                result = "{persian=" + getName() + "}"
+        }
         if parse != nil {
             result = result + "{morphologicalAnalysis=" + (parse?.description())! + "}"
         }
@@ -456,6 +466,14 @@ public class AnnotatedWord : Word {
     }
 
     /**
+     * Returns the language of the word.
+     - Returns: Language of the word.
+     */
+    public func getLanguage() -> LanguageType{
+        return language
+    }
+
+    /**
      * Returns the universal dependency layer of the word.
      - Returns: Universal dependency relation of the word.
      */
@@ -487,4 +505,24 @@ public class AnnotatedWord : Word {
             setNamedEntityType(namedEntity: gazetteer.getName());
         }
     }
+    
+    /**
+     * Converts a language string to language.
+     * - Parameters:
+     *      - languageString: String defining the language name.
+     * - Returns: Language corresponding to the languageString.
+     */
+    public func getLanguageFromString(languageString: String) -> LanguageType{
+        switch languageString.lowercased() {
+            case "turkish":
+                return LanguageType.TURKISH
+            case "english":
+                return LanguageType.ENGLISH
+            case "persian":
+                return LanguageType.PERSIAN
+            default:
+                return LanguageType.TURKISH
+        }
+    }
+
 }
