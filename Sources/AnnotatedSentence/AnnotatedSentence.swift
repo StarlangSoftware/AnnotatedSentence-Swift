@@ -11,6 +11,7 @@ import PropBank
 import FrameNet
 import MorphologicalAnalysis
 import WordNet
+import DependencyParser
 
 public class AnnotatedSentence : Sentence{
     
@@ -247,6 +248,18 @@ public class AnnotatedSentence : Sentence{
         }
     }
     
+    public func compareParses(sentence : AnnotatedSentence) -> ParserEvaluationScore{
+        let score = ParserEvaluationScore()
+        for i in 0..<wordCount(){
+            let relation1 = (getWord(index: i) as! AnnotatedWord).getUniversalDependency()
+            let relation2 = (sentence.getWord(index: i) as! AnnotatedWord).getUniversalDependency()
+            if relation1 != nil && relation2 != nil{
+                score.add(parserEvaluationScore: relation1!.compareRelations(relation: relation2!))
+            }
+        }
+        return score
+    }
+
     /**
      * Creates a list of literal candidates for the i'th word in the sentence. It combines the results of
      * 1. All possible root forms of the i'th word in the sentence

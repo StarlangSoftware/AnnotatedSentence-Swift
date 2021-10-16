@@ -7,6 +7,7 @@
 
 import Foundation
 import Corpus
+import DependencyParser
 
 public class AnnotatedCorpus : Corpus{
     
@@ -64,6 +65,16 @@ public class AnnotatedCorpus : Corpus{
             }
         } catch {
         }
+    }
+    
+    public func compareParses(corpus: AnnotatedCorpus) -> ParserEvaluationScore{
+        let result = ParserEvaluationScore()
+        for i in 0..<sentences.count{
+            let sentence1 = getSentence(index: i) as! AnnotatedSentence
+            let sentence2 = corpus.getSentence(index: i) as! AnnotatedSentence
+            result.add(parserEvaluationScore: sentence1.compareParses(sentence: sentence2))
+        }
+        return result
     }
     
 }
