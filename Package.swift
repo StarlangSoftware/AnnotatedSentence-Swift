@@ -12,10 +12,10 @@ let package = Package(
             targets: ["AnnotatedSentence"]),
     ],
     dependencies: [
-        .package(name: "WordNet", url: "https://github.com/StarlangSoftware/TurkishWordNet-Swift.git", .exact("1.0.1")),
+        .package(name: "WordNet", url: "https://github.com/StarlangSoftware/TurkishWordNet-Swift.git", .exact("1.0.2")),
         .package(name: "SentiNet", url: "https://github.com/StarlangSoftware/TurkishSentiNet-Swift.git", .exact("1.0.4")),
         .package(name: "DependencyParser", url: "https://github.com/StarlangSoftware/TurkishDependencyParser-Swift.git", .exact("1.0.2")),
-        .package(name: "PropBank", url: "https://github.com/StarlangSoftware/TurkishPropBank-Swift.git", .exact("1.0.3")),
+        .package(name: "PropBank", url: "https://github.com/StarlangSoftware/TurkishPropBank-Swift.git", .exact("1.0.4")),
         .package(name: "FrameNet", url: "https://github.com/StarlangSoftware/TurkishFrameNet-Swift.git", .exact("1.0.1")),
         .package(name: "NamedEntityRecognition", url: "https://github.com/StarlangSoftware/TurkishNamedEntityRecognition-Swift.git", .exact("1.0.5"))],
     targets: [
