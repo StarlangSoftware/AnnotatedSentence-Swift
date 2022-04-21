@@ -48,6 +48,7 @@ public class AnnotatedWord : Word {
             }
             if !layer.contains("="){
                 setName(name: layer)
+                continue
             }
             let layerType = String(layer[layer.startIndex..<layer.range(of: "=")!.lowerBound])
             let layerValue = String(layer[layer.index(layer.firstIndex(of: "=")!, offsetBy: 1)...])
