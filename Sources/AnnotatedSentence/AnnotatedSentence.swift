@@ -248,6 +248,10 @@ public class AnnotatedSentence : Sentence{
         }
     }
     
+    /// Compares the sentence with the given sentence and returns a parser evaluation score for this comparison. The result
+    /// is calculated by summing up the parser evaluation scores of word by word dpendency relation comparisons.
+    /// - Parameter sentence: Sentence to be compared.
+    /// - Returns: A parser evaluation score object.
     public func compareParses(sentence : AnnotatedSentence) -> ParserEvaluationScore{
         let score = ParserEvaluationScore()
         for i in 0..<wordCount(){

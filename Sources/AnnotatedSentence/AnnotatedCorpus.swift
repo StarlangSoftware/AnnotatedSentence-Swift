@@ -67,6 +67,10 @@ public class AnnotatedCorpus : Corpus{
         }
     }
     
+    /// Compares the corpus with the given corpus and returns a parser evaluation score for this comparison. The result
+    /// is calculated by summing up the parser evaluation scores of sentence by sentence dependency relation comparisons.
+    /// - Parameter corpus: Corpus to be compared.
+    /// - Returns: A parser evaluation score object.
     public func compareParses(corpus: AnnotatedCorpus) -> ParserEvaluationScore{
         let result = ParserEvaluationScore()
         for i in 0..<sentences.count{

@@ -496,6 +496,8 @@ public class AnnotatedWord : Word {
         }
     }
     
+    /// Checks the gazetteer and sets the named entity tag accordingly.
+    /// - Parameter gazetteer: Gazetteer used to set named entity tag.
     public func checkGazetteer(gazetteer: Gazetteer){
         let wordLowercase = Word.lowercase(s: getName())
         if gazetteer.contains(word: wordLowercase) && parse!.containsTag(tag: MorphologicalTag.PROPERNOUN) {
